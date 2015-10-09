@@ -4,6 +4,11 @@
 
 using namespace std;
 
+/*
+递归，用两个函数分别处理垂直线和水平线
+建立缓存存储子状态以达到时间要求
+*/
+
 struct idxh {
 	int n, x1, x2, y;
 	idxh(int n, int x1, int x2, int y) :
@@ -23,7 +28,7 @@ int crossv(idxv idx, int p2n, int p2n1);
 map<idxh, int> libh;
 map<idxv, int> libv;
 
-//重载 < 使 map 库识别构造体
+//重载 < 使 map 库识别自建构造体
 bool operator <(const idxh& left, const idxh& right) {
 	if (left.n < right.n) return 1;
 	if (left.n > right.n) return 0;
@@ -43,7 +48,7 @@ bool operator <(const idxv& left, const idxv& right) {
 	return left.x < right.x;
 }
 
-
+//将幂运算以参数形式传入以提升效率
 int crossh(idxh idx, int p2n,int p2n1) {
 	//预处理越界
 	if (idx.x1 < 0) idx.x1 = 0;
